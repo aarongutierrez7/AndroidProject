@@ -19,6 +19,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        setTheme(R.style.Theme_AndroidApp);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         userAPI = ClientAPI.getClient().create(UserAPI.class);
