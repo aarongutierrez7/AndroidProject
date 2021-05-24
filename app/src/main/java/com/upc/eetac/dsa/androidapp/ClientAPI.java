@@ -7,21 +7,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ClientAPI {
 
-    private static Retrofit retrofit = null;
+    private static Retrofit getRetrofit() {
 
-
-    static Retrofit getClient() {
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080")
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
         return retrofit;
+    }
+
+
+    public static UserService getUserService(){
+        UserService userAPI = getRetrofit().create(UserService.class);
+        return userAPI;
     }
 }

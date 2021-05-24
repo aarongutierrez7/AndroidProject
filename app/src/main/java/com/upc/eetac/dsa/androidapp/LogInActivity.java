@@ -4,20 +4,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LogInActivity extends AppCompatActivity {
     
-    UserAPI userAPI;
+    UserService userAPI;
     EditText uname;
     EditText pswrd;
 
@@ -25,7 +23,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        userAPI = ClientAPI.getClient().create(UserAPI.class);
+//        userAPI = ClientAPI.getClient().create(UserService.class);
 
         uname= (EditText) findViewById(R.id.user);
         pswrd = (EditText) findViewById(R.id.password);

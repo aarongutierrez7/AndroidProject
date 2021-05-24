@@ -2,6 +2,7 @@ package com.upc.eetac.dsa.androidapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +16,51 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    UserAPI userAPI;
+    EditText username;
+    EditText email;
+    EditText password;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+
+        username=findViewById(R.id.user);
+        email=findViewById(R.id.emailAddress);
+        password=findViewById(R.id.password);
+
+    }
+
+    public void registrar(View view){
+
+        Intent intent = new Intent(this, RegisterActivity.class);
+
+
+        User usuario = new User(username.getText().toString(), email.getText().toString(), password.getText().toString());
+        Call<models.User> call = ClientAPI.getUserService().addUser(usuario);
+
+        call.enqueue(new Callback<models.User>() {
+            @Override
+            public void onResponse(Call<models.User> call, Response<models.User> response) {
+                Log.i("", "Codigo del servidor: "+ response.code());
+                models.User usuarioServidor = response.body();
+                Log.i("","Usuario enviado: " + usuarioServidor);
+                if (response.code() ==201)
+                {
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<models.User> call, Throwable t) {
+
+            }
+        });
+    }
+
+    /*
+    UserService userAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
         setTheme(R.style.Theme_AndroidApp);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        userAPI = ClientAPI.getClient().create(UserAPI.class);
+        userAPI = ClientAPI.getUserService().create(UserService.class);
 
     }
 
@@ -72,4 +117,6 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
 
     }
+    */
+
 }
