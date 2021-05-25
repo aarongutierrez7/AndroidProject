@@ -27,7 +27,7 @@ public interface UserService {
     Call<User> getUserList();
 
     @DELETE("user/borrarUsuario")
-    Call<User> deleteUser(@Body User user);
+    Call<User> deleteUser(@Body String user);
 /*
     @PATCH("/dsaApp/{userID}/UpdateMonedas")
     Call<User> updateCoins(@Path("userID") String userID,@Body User user);

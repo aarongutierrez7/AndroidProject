@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import models.User;
 import retrofit2.Call;
@@ -19,10 +23,14 @@ public class RegisterActivity extends AppCompatActivity {
     EditText username;
     EditText email;
     EditText password;
+    ProgressBar pb;
+    int counter = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //startProgressBar();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -30,7 +38,28 @@ public class RegisterActivity extends AppCompatActivity {
         email=findViewById(R.id.emailAddress);
         password=findViewById(R.id.password);
 
+
     }
+
+    /*private void startProgressBar() {
+
+        pb = (ProgressBar)findViewById(R.id.progressBar);
+
+        final Timer t = new Timer();
+        TimerTask tt = new TimerTask() {
+            @Override
+            public void run() {
+                counter = counter + 2;
+                pb.setProgress(counter);
+
+                if (counter==100){
+                    t.cancel();
+                }
+            }
+        };
+
+        t.schedule(tt,0,100);
+    }*/
 
     public void registrar(View view){
 
@@ -113,10 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void goBack(View view) {
-        finish();
 
-    }
     */
 
 }

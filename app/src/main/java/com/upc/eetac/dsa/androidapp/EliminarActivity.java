@@ -32,10 +32,10 @@ public class EliminarActivity extends AppCompatActivity {
 
     public void deleteUser (View view){
 
-        Call<Void> call = ClientAPI.getUserService().deleteUser(usernameEliminar.getText().toString());
-        call.enqueue(new Callback<Void>() {
+        Call<User> call = ClientAPI.getUserService().deleteUser(usernameEliminar.getText().toString());
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code()==201){
                     Log.i("","El código es: "+response.code());
                 }
@@ -43,8 +43,9 @@ public class EliminarActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
+            public void onFailure(Call<User> call, Throwable t) {
+                call.cancel();
+                Log.d("Error","Failure");
             }
         });
     }
