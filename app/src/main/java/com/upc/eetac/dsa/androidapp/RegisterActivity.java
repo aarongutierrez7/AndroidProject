@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void registrar(View view){
 
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, PrincipalActivity.class);
 
 
         User usuario = new User(username.getText().toString(), email.getText().toString(), password.getText().toString());

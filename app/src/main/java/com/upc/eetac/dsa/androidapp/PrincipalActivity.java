@@ -26,7 +26,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void eliminarUsuario (View view){
-        Intent intent = new Intent(this,EditarActivity.class);
+        Intent intent = new Intent(this,EliminarActivity.class);
         startActivity(intent);
     }
 }

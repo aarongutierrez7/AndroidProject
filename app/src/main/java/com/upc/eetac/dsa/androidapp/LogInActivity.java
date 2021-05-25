@@ -52,6 +52,9 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     public void sendLogin(View view) {
+
+        Intent intent = new Intent(this, PrincipalActivity.class);
+
         uname = (EditText) findViewById(R.id.user);
         pswrd = (EditText) findViewById(R.id.password);
         String username = uname.getText().toString();
