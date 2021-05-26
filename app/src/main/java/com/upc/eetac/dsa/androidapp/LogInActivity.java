@@ -1,12 +1,15 @@
 package com.upc.eetac.dsa.androidapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import models.User;
@@ -21,7 +24,27 @@ public class LogInActivity extends AppCompatActivity {
     UserService userAPI;
     EditText uname;
     EditText pswrd;
-    Button signUpButton;
+    Button signUpButton,loginButton;
+    TextView txtUser,txtPass;
+
+    ProgressBarDialog loadingPB = new ProgressBarDialog(LogInActivity.this);
+
+
+
+
+    public void botonRegistrar (View v){
+        loadingPB.startPBDialog();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingPB.dismissPBDialog();
+            }
+        }, 4000);
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(intent);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +54,16 @@ public class LogInActivity extends AppCompatActivity {
         uname = (EditText) findViewById(R.id.user);
         pswrd = (EditText) findViewById(R.id.password);
 
+        txtUser = (TextView) findViewById(R.id.txtUser);
+        txtPass = (TextView) findViewById(R.id.txtPass);
+
         signUpButton=(Button)findViewById(R.id.register);
+        loginButton=(Button)findViewById(R.id.login);
         ProgressBarDialog loadingPB = new ProgressBarDialog(LogInActivity.this);
+
+        cargarPreferencias();
+
+
 
         signUpButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -51,6 +82,38 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
+    private void cargarPreferencias() {
+        SharedPreferences preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
+
+        String user = preferences.getString("user","No existe info");
+        String pass = preferences.getString("pass","No existe info");
+
+        txtUser.setText(user);
+        txtPass.setText(pass);
+
+    }
+
+    public void buttonGuardar(View view){
+        guardarPreferencias();
+    }
+
+    public void guardarPreferencias(){
+
+        SharedPreferences preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
+
+        String usuario = uname.getText().toString();
+        String password = pswrd.getText().toString();
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("user",usuario);
+        editor.putString("pass", password);
+
+        txtUser.setText(usuario);
+        txtPass.setText(password);
+
+        editor.commit();
+    }
+
     public void sendLogin(View view) {
 
         Intent intent = new Intent(this, PrincipalActivity.class);
@@ -59,6 +122,7 @@ public class LogInActivity extends AppCompatActivity {
         pswrd = (EditText) findViewById(R.id.password);
         String username = uname.getText().toString();
         String password = pswrd.getText().toString();
+
 
         Call<User> call = userAPI.loginUser(new User(username, password, ""));
         call.enqueue(new Callback<User>() {
