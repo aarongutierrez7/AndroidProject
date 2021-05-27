@@ -3,6 +3,7 @@ package com.upc.eetac.dsa.androidapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import models.Credentials;
 import models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,7 +52,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //userAPI = ClientAPI.getClient().create(UserService.class);
+        userAPI = ClientAPI.getUserService();
         uname = (EditText) findViewById(R.id.user);
         pswrd = (EditText) findViewById(R.id.password);
 
@@ -59,12 +61,14 @@ public class LogInActivity extends AppCompatActivity {
 
         signUpButton=(Button)findViewById(R.id.register);
         loginButton=(Button)findViewById(R.id.login);
+
         ProgressBarDialog loadingPB = new ProgressBarDialog(LogInActivity.this);
 
         cargarPreferencias();
 
 
 
+        /*
         signUpButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -80,6 +84,7 @@ public class LogInActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        */
     }
 
     private void cargarPreferencias() {
@@ -124,17 +129,17 @@ public class LogInActivity extends AppCompatActivity {
         String password = pswrd.getText().toString();
 
 
-        Call<User> call = userAPI.loginUser(new User(username, password, ""));
-        call.enqueue(new Callback<User>() {
+        Call<Credentials> call = userAPI.loginUser(new Credentials(username, password));
+        call.enqueue(new Callback<Credentials>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Credentials> call, Response<Credentials> response) {
                 Log.d("TAG", response.code() + "");
                 if (response.code() == 201) {
-                    User usuario = response.body();
-                    String pswrd = usuario.getPassword();
-                    String uname = usuario.getUsername();
-                    Integer id = usuario.getIdUser();
-                    Log.d("Usuario", uname + " " + pswrd + " " + id);
+                    Credentials credentials = response.body();
+                    String pswrd = credentials.getPassword();
+                    String uname = credentials.getUsername();
+                    //Integer id = credentials.getIdUser();
+                    Log.d("Usuario", uname + " " + pswrd + " ");
                 } else {
                     Log.d("Error", "Login failed");
                     Toast toast = Toast.makeText(getApplicationContext(), "Login failed! Please try again", Toast.LENGTH_LONG);
@@ -148,7 +153,7 @@ public class LogInActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Credentials> call, Throwable t) {
                 call.cancel();
                 Log.d("Error", "Failure");
             }

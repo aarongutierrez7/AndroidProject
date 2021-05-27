@@ -1,7 +1,10 @@
 package com.upc.eetac.dsa.androidapp;
 
+import android.net.wifi.hotspot2.pps.Credential;
+
 import java.util.List;
 
+import models.Credentials;
 import models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,7 +21,7 @@ public interface UserService {
     Call<User> addUser(@Body User user);
 
     @POST("auth/iniciarSesion")
-    Call<User> loginUser(@Body User user);
+    Call<Credentials> loginUser(@Body Credentials credentials);
 
     @GET ("user/{username}")
     Call<User> getUser(@Path("username") String username);
