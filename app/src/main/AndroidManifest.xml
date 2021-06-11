@@ -3,6 +3,7 @@
     package="com.upc.eetac.dsa.androidapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,26 +13,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterActivity"
+        <activity android:name=".DetalleObjetoActivity"></activity>
+        <activity android:name=".PocimaRojaActivity" />
+        <activity android:name=".PocimaAzulActivity" />
+        <activity android:name=".ManzanaActivity" />
+        <activity android:name=".FlechaOroActivity" />
+        <activity android:name=".FlechaPlataActivity" />
+        <activity android:name=".EscudoOroActivity" />
+        <activity android:name=".FlechaMaderaActivity" />
+        <activity android:name=".EscudoPlataActivity" />
+        <activity android:name=".EscudoMaderaActivity" />
+        <activity android:name=".InventarioActivity" />
+        <activity android:name=".TiendaActivity" />
+        <activity android:name=".EstadisticasActivity" />
+        <activity
+            android:name=".RegisterActivity"
             android:screenOrientation="fullSensor" />
-        <activity android:name=".PrincipalActivity"
+        <activity
+            android:name=".PrincipalActivity"
             android:screenOrientation="fullSensor" />
-        <activity android:name=".EditarActivity"
+        <activity
+            android:name=".EditarActivity"
             android:screenOrientation="fullSensor" />
-        <activity android:name=".EliminarActivity"
+        <activity
+            android:name=".ConsultarActivity"
             android:screenOrientation="fullSensor" />
-        <activity android:name=".ConsultarActivity"
-            android:screenOrientation="fullSensor" />
-
-
-        <activity android:name=".LogInActivity"
+        <activity
+            android:name=".LogInActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

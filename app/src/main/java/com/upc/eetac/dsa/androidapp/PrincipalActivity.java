@@ -25,8 +25,24 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void eliminarUsuario (View view){
-        Intent intent = new Intent(this,EliminarActivity.class);
+    public void tienda (View view){
+        Intent intent = new Intent(this,TiendaActivity.class);
         startActivity(intent);
     }
+
+    public void iniciarPartida (View view){
+        Intent intent = new Intent(this,IniciarPartidaActivity.class);
+        startActivity(intent);
+    }
+
+    public void estadisticasPartidas (View view){
+        Intent intent = new Intent(this,EstadisticasActivity.class);
+        startActivity(intent);
+    }
+
+    public void inventario (View view){
+        Intent intent = new Intent(this,InventarioActivity.class);
+        startActivity(intent);
+    }
+
 }
