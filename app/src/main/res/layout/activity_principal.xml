@@ -42,7 +42,8 @@
         android:onClick="consultarUsuario"
         android:text="Consultar usuario"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tienda" />
 
     <Button
         android:id="@+id/button2"
@@ -55,7 +56,8 @@
         android:onClick="editarUsuario"
         android:text="editar usuario"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventario" />
 
     <Button
         android:id="@+id/tienda"

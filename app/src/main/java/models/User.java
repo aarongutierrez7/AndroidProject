@@ -4,13 +4,16 @@ import java.util.List;
 
 public class User {
 
+    String ID;
     String username;
     String password;
     String email;
-    int monedas;
+    int vida;
+    int fuerza;
+    int coins;
 
-    List<Object> listaObjetos;
-    List<Game> listaPartidas;
+    //List<Object> listaObjetos;
+    //List<Game> listaPartidas;
 
 
     public User() {
@@ -43,19 +46,35 @@ public class User {
 
     public void setEmail(String email) { this.email = email; }
 
-    public int getMonedas() {
-        return monedas;
+    public String getID() {
+        return ID;
     }
 
-    public void setMonedas(int monedas) {
-        this.monedas = monedas;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public List<Object> getListaObjetos() {
-        return listaObjetos;
+    public int getVida() {
+        return vida;
     }
 
-    public void setListaObjetos(List<Object> listaObjetos) {
-        this.listaObjetos = listaObjetos;
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public int getFuerza() {
+        return fuerza;
+    }
+
+    public void setFuerza(int fuerza) {
+        this.fuerza = fuerza;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 }

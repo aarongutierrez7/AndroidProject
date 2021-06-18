@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InventarioActivity">
+    android:background="@drawable/fondo"
+    tools:context=".TiendaActivity">
 
     <TableRow
         android:id="@+id/tableRow"
@@ -24,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
-                android:text="Monedas disponibles"
+                android:text="Monedas disponibles:"
                 android:textColor="#000000"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -34,12 +35,13 @@
 
             <EditText
                 android:id="@+id/monedasDisponiblesTienda"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_width="75dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView27"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +51,7 @@
     </TableRow>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/MyRecyclerView"
         android:layout_width="409dp"
         android:layout_height="649dp"
         app:layout_constraintBottom_toBottomOf="parent"

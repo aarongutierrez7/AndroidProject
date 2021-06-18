@@ -5,13 +5,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import java.util.List;
 
+import models.Inventario;
 import models.Object;
 import models.User;
 import retrofit2.Call;
@@ -20,69 +23,85 @@ import retrofit2.Response;
 
 public class InventarioActivity extends AppCompatActivity {
 
-    ProgressBar progressBar;
-    MyAdapterTienda myAdapterTienda;
-    RecyclerView recyclerView;
-    List<Object> objects;
+    Inventario inventarioUser;
+    EditText escudoMadera;
+    EditText escudoPlata;
+    EditText escudoOro;
+    EditText flechaMadera;
+    EditText flechaPlata;
+    EditText flechaOro;
+    EditText pocionAzul;
+    EditText pocionRoja;
+    EditText manzana;
+    SharedPreferences sharedPreferences;
 
     public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tienda);
-        recyclerView=findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
+        setContentView(R.layout.activity_inventario);
         context = getApplicationContext();
-        getObjetos();
+
+        escudoMadera = findViewById(R.id.escudoMaderaCantidad);
+        escudoPlata = findViewById(R.id.escudoPlataCantidad);
+        escudoOro = findViewById(R.id.escudoOroCantidad);
+        flechaMadera = findViewById(R.id.flechaMaderaCantidad);
+        flechaPlata = findViewById(R.id.flechaPlataCantidad);
+        flechaOro = findViewById(R.id.flechaOroCantidad);
+        pocionAzul = findViewById(R.id.pocimaAzulCantidad);
+        pocionRoja = findViewById(R.id.pocimaRojaCantidad);
+        manzana = findViewById(R.id.mazanaCantidad);
+        sharedPreferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
+        String user = sharedPreferences.getString("user","No existe info");
+
+
+        getInventario(user);
     }
 
 
-    public void getObjetos()
+    public void getInventario(String user)
     {
-        Call<List<Object>> call = ClientAPI.getUserService().getObjetosUser("a");
-        call.enqueue(new Callback<List<Object>>() {
+        //Inventario inventario = new Inventario("prueba");
+        Call<Inventario> call = ClientAPI.getUserService().getObjetosUser(user);
+        Log.i("SHAREDPREF",  user);
+        call.enqueue(new Callback<Inventario>() {
             @Override
-            public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
+            public void onResponse(Call<Inventario> call, Response<Inventario> response) {
+                Log.i("PROVA", "" + response.code());
+
                 if(response.code() == 200)
                 {
-                    objects = response.body();
-                    progressBar.setVisibility(View.INVISIBLE);
-                    if(myAdapterTienda == null){
-                        MyObjectsRecyclerViewAdapter(objects);
-                    }else{
-                        myAdapterTienda = null;
-                        MyObjectsRecyclerViewAdapter(objects);
-                    }
+                    Log.i("PROVA", "" + response.body().getEscudoMadera());
+
+                    inventarioUser = response.body();
+                    //progressBar.setVisibility(View.INVISIBLE);
+                    escudoMadera.setText(""+inventarioUser.getEscudoMadera());
+                    escudoPlata.setText(""+inventarioUser.getEscudoPlata());
+                    escudoOro.setText(""+inventarioUser.getEscudoOro());
+                    flechaMadera.setText(""+inventarioUser.getFlechaMadera());
+                    flechaPlata.setText(""+inventarioUser.getFlechaPlata());
+                    flechaOro.setText(""+inventarioUser.getFlechaOro());
+                    pocionAzul.setText(""+inventarioUser.getPocionAzul());
+                    pocionRoja.setText(""+inventarioUser.getPocionRoja());
+                    manzana.setText(""+inventarioUser.getManzana());
+
+
+
+                }
+                else {
+                    Log.d("INVENTARIO", "Codigo" + String.valueOf(response.code()));
                 }
             }
+
             @Override
-            public void onFailure(Call<List<Object>> call, Throwable t) {
+            public void onFailure(Call<Inventario> call, Throwable t) {
 
             }
         });
     }
 
-    private void MyObjectsRecyclerViewAdapter(List<Object> objects){
-        myAdapterTienda = new MyAdapterTienda(objects);
-        recyclerView.setAdapter(myAdapterTienda);
-        myAdapterTienda.SetOnItemClickListener(new MyAdapterTienda.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                //TODO NEED TO IMPLEMENT PLAYER STATS DETAIL ACTIVITY
-                LaunchObjectDetailPopup(position);
-            }
-        });
-    }
-    private void LaunchObjectDetailPopup(int position){
-        //Start a new activity with the detailed data of the Museum
-        Log.d("Museum Detail Activity","Detail of the Museum PopUp");
-        Intent intent = new Intent(InventarioActivity.this ,DetalleObjetoActivity.class);
-        intent.putExtra("Element", String.valueOf(objects.get(position)));
-        startActivityForResult(intent,2);
-    }
-
-
+/*
     public void escudoMadera(View view)
     {
         Intent intent = new Intent(this,EscudoMaderaActivity.class);
@@ -127,5 +146,5 @@ public class InventarioActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, PocimaRojaActivity.class);
         startActivity(intent);
-    }
+    }*/
 }

@@ -44,7 +44,7 @@ public class ConsultarActivity extends AppCompatActivity {
 
                     resultadoUsername.setText(response.body().getUsername());
                     resultadoCorreo.setText(response.body().getEmail());
-                    resultadoMonedas.setText(response.body().getMonedas());
+                    resultadoMonedas.setText(response.body().getCoins());
                 }
             }
 

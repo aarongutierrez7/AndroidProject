@@ -72,10 +72,10 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<models.User>() {
             @Override
             public void onResponse(Call<models.User> call, Response<models.User> response) {
-                Log.i("", "Codigo del servidor: "+ response.code());
+                Log.i("REGISTRO", "Codigo del servidor: "+ response.code());
                 models.User usuarioServidor = response.body();
-                Log.i("","Usuario enviado: " + usuarioServidor);
-                if (response.code() ==201)
+                Log.i("REGISTRO","Usuario enviado: " + usuarioServidor);
+                if (response.code() ==200)
                 {
                     startActivity(intent);
                 }

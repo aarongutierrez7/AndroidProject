@@ -4,7 +4,10 @@ import android.net.wifi.hotspot2.pps.Credential;
 
 import java.util.List;
 
+import models.CompraRespuesta;
 import models.Credentials;
+import models.CredentialsCompra;
+import models.Inventario;
 import models.User;
 import models.Object;
 import retrofit2.Call;
@@ -24,7 +27,7 @@ public interface UserService {
     @POST("auth/iniciarSesion")
     Call<Credentials> loginUser(@Body Credentials credentials);
 
-    @GET ("user/{username}")
+    @GET ("user/obtenerUsuario/{username}")
     Call<User> getUser(@Path("username") String username);
 
     @GET ("user/listaUsuarios")
@@ -36,8 +39,11 @@ public interface UserService {
     @GET ("tienda/catalogo")
     Call<List<Object>> getObjetosTienda();
 
-    @GET ("tienda/getInventario/{username}")
-    Call<List<Object>> getObjetosUser(@Path("username") String username);
+    @POST("tienda/comprarObjeto")
+    Call<CredentialsCompra> addObjetoTienda(@Body CredentialsCompra credentials);
+
+    @GET ("tienda/obtenerInventarioUsuario/{username}")
+    Call<Inventario> getObjetosUser(@Path("username") String username);
     /*
     @PATCH("/dsaApp/{userID}/UpdateMonedas")
     Call<User> updateCoins(@Path("userID") String userID,@Body User user);

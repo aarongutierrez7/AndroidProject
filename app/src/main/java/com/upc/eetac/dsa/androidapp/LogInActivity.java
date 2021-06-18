@@ -31,22 +31,6 @@ public class LogInActivity extends AppCompatActivity {
     ProgressBarDialog loadingPB = new ProgressBarDialog(LogInActivity.this);
 
 
-
-
-    public void botonRegistrar (View v){
-        loadingPB.startPBDialog();
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadingPB.dismissPBDialog();
-            }
-        }, 4000);
-        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivity(intent);
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +41,9 @@ public class LogInActivity extends AppCompatActivity {
 
         signUpButton=(Button)findViewById(R.id.register);
         loginButton=(Button)findViewById(R.id.login);
+        cargarPreferencias();
 
         ProgressBarDialog loadingPB = new ProgressBarDialog(LogInActivity.this);
-
-        //cargarPreferencias();
 
 
 
@@ -102,7 +85,21 @@ public class LogInActivity extends AppCompatActivity {
         editor.putString("user",usuario);
         editor.putString("pass", password);
 
-        editor.commit();
+        editor.apply();
+    }
+
+    public void botonRegistrar (View v){
+        loadingPB.startPBDialog();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingPB.dismissPBDialog();
+            }
+        }, 4000);
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(intent);
+
     }
 
     public void sendLogin(View view) {
@@ -113,31 +110,26 @@ public class LogInActivity extends AppCompatActivity {
         pswrd = (EditText) findViewById(R.id.password);
         String username = uname.getText().toString();
         String password = pswrd.getText().toString();
-        guardarPreferencias();
-        startActivity(intent);
+
 
         Call<Credentials> call = userAPI.loginUser(new Credentials(username, password));
         call.enqueue(new Callback<Credentials>() {
             @Override
             public void onResponse(Call<Credentials> call, Response<Credentials> response) {
-                Log.d("TAG", response.code() + "");
-                if (response.code() == 201) {
+                Log.d("LOGIN", response.code() + " ");
+                if (response.code() == 200) {
                     Credentials credentials = response.body();
                     String pswrd = credentials.getPassword();
                     String uname = credentials.getUsername();
                     Log.d("Usuario", uname + " " + pswrd + " ");
+                    guardarPreferencias();
                     startActivity(intent);
                 }
 
                 else {
-                    Log.d("Error", "Login failed");
+                    Log.d("ERROR", "Login failed");
                     Toast toast = Toast.makeText(getApplicationContext(), "Login failed! Please try again", Toast.LENGTH_LONG);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            toast.show();
-                        }
-                    });
+                    toast.show();
                 }
             }
 
@@ -145,7 +137,7 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Credentials> call, Throwable t) {
                 call.cancel();
-                Log.d("Error", "Failure");
+                Log.d("ERROR", "Failure");
             }
         });
 
