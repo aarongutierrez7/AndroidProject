@@ -208,35 +208,5 @@ public class TiendaActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void comprarEscudoMadera (View view) {
-    }
-
-    public void comprarEscudoPlata (View view) {
-
-    }
-
-    public void comprarEscudoOro (View view) {
-
-    }
-
-    public void comprarFlechaPlata (View view) {
-
-    }
-
-    public void comprarFlechaOro (View view) {
-
-    }
-
-    public void comprarManzana (View view) {
-
-    }
-
-    public void comprarPocimaAzul (View view) {
-
-    }
-
-    public void comprarPocimaRoja (View view) {
-
-    }
 }
 

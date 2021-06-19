@@ -14,6 +14,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".DetalleObjetoActivity"></activity>
         <activity android:name=".PocimaRojaActivity" />
+        <activity android:name=".RecordsActivity" />
         <activity android:name=".PocimaAzulActivity" />
         <activity android:name=".ManzanaActivity" />
         <activity android:name=".FlechaOroActivity" />

@@ -1,20 +1,17 @@
 package com.upc.eetac.dsa.androidapp;
 
-import android.net.wifi.hotspot2.pps.Credential;
-
 import java.util.List;
 
-import models.CompraRespuesta;
 import models.Credentials;
 import models.CredentialsCompra;
 import models.Inventario;
+import models.RecordUsuario;
 import models.User;
 import models.Object;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -38,6 +35,8 @@ public interface UserService {
 
     @GET ("tienda/catalogo")
     Call<List<Object>> getObjetosTienda();
+    @GET ("estadisticas/records")
+    Call<List<RecordUsuario>> getRecordsTotales();
 
     @POST("tienda/comprarObjeto")
     Call<CredentialsCompra> addObjetoTienda(@Body CredentialsCompra credentials);

@@ -35,8 +35,8 @@ public class PrincipalActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void estadisticasPartidas (View view){
-        Intent intent = new Intent(this,EstadisticasActivity.class);
+    public void rankings (View view){
+        Intent intent = new Intent(this,RecordsActivity.class);
         startActivity(intent);
     }
 

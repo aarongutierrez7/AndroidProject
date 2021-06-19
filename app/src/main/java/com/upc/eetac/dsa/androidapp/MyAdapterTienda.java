@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import models.CompraRespuesta;
-import models.Credentials;
 import models.CredentialsCompra;
 import models.Object;
 import retrofit2.Call;
@@ -158,7 +156,9 @@ public class MyAdapterTienda extends RecyclerView.Adapter<MyAdapterTienda.ViewHo
                             //CredentialsCompra compra = response.body();
                             Log.i("REGISTRO-COMPRA", "Codigo recibido: " + response.code());
                             if (response.code() == 200) {
-                                MyAdapterTienda.this.tiendaActivity.monedas.setText("****");
+                                Log.i("REGISTRO-COMPRA", "Valor monedas: "+response.body().getMonedasActualizadas());
+
+                                MyAdapterTienda.this.tiendaActivity.monedas.setText(""+response.body().getMonedasActualizadas());
 
                             }
                             if (response.code() == 402){
