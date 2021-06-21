@@ -1,5 +1,6 @@
 package com.upc.eetac.dsa.androidapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -23,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText username;
     EditText email;
     EditText password;
+    EditText passwordRepeat;
     ProgressBar pb;
     int counter = 0;
 
@@ -37,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         username=findViewById(R.id.user);
         email=findViewById(R.id.emailAddress);
         password=findViewById(R.id.password);
+        passwordRepeat=findViewById(R.id.passwordRepeat);
 
 
     }
@@ -62,30 +65,41 @@ public class RegisterActivity extends AppCompatActivity {
     }*/
 
     public void registrar(View view){
+        Log.i("REGISTRO", "se ha pulsado");
+        if (passwordRepeat.getText().toString().equals(password.getText().toString())){
+            Log.i("REGISTRO", "Ha entrado");
 
-        Intent intent = new Intent(this, PrincipalActivity.class);
+            Intent intent = new Intent(this, PrincipalActivity.class);
 
 
-        User usuario = new User(username.getText().toString(), email.getText().toString(), password.getText().toString());
-        Call<models.User> call = ClientAPI.getUserService().addUser(usuario);
+            User usuario = new User(username.getText().toString(), email.getText().toString(), password.getText().toString());
+            Call<models.User> call = ClientAPI.getUserService().addUser(usuario);
 
-        call.enqueue(new Callback<models.User>() {
-            @Override
-            public void onResponse(Call<models.User> call, Response<models.User> response) {
-                Log.i("REGISTRO", "Codigo del servidor: "+ response.code());
-                models.User usuarioServidor = response.body();
-                Log.i("REGISTRO","Usuario enviado: " + usuarioServidor);
-                if (response.code() ==200)
-                {
-                    startActivity(intent);
+            call.enqueue(new Callback<models.User>() {
+                @Override
+                public void onResponse(Call<models.User> call, Response<models.User> response) {
+                    Log.i("REGISTRO", "Codigo del servidor: "+ response.code());
+                    models.User usuarioServidor = response.body();
+                    Log.i("REGISTRO","Usuario enviado: " + usuarioServidor);
+                    if (response.code() ==200)
+                    {
+                        startActivity(intent);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<models.User> call, Throwable t) {
+                @Override
+                public void onFailure(Call<models.User> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        }
+        else {
+            Log.i("REGISTRO", "NO HA ENTRADO");
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("Passwords do not match!");
+            alertDialogBuilder.show();
+        }
+
     }
 
     /*

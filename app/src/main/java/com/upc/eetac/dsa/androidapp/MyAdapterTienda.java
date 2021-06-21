@@ -12,6 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Others.EscudoMaderaActivity;
+import Others.EscudoOroActivity;
+import Others.EscudoPlataActivity;
+import Others.FlechaMaderaActivity;
+import Others.FlechaOroActivity;
+import Others.FlechaPlataActivity;
+import Others.ManzanaActivity;
+import Others.PocimaAzulActivity;
+import Others.PocimaRojaActivity;
 import models.CredentialsCompra;
 import models.Object;
 import retrofit2.Call;

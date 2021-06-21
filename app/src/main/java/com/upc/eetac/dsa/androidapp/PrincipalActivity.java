@@ -21,7 +21,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void editarUsuario (View view){
-        Intent intent = new Intent(this,EditarActivity.class);
+        Intent intent = new Intent(this,MenuEditarActivity.class);
         startActivity(intent);
     }
 
@@ -36,7 +36,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void rankings (View view){
-        Intent intent = new Intent(this,RecordsActivity.class);
+        Intent intent = new Intent(this, MenuRecordsActivity.class);
         startActivity(intent);
     }
 

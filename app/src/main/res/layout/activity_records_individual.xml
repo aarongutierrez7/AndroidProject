@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_bosque2"
-    tools:context=".GlobalRecordsActivity">
+    tools:context=".IndividualRecordsActivity">
 
     <TableRow
         android:id="@+id/tableRow1"
@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorBlanco"
-                android:text="RANKING GLOBAL"
+                android:text="RANKING INDIVIDUAL"
                 android:textColor="#000000"
                 android:textSize="20dp"
                 android:textStyle="bold"

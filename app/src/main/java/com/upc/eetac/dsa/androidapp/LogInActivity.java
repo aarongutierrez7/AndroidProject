@@ -1,6 +1,7 @@
 package com.upc.eetac.dsa.androidapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.hotspot2.pps.Credential;
@@ -19,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LogInActivity extends AppCompatActivity {
@@ -128,8 +130,12 @@ public class LogInActivity extends AppCompatActivity {
 
                 else {
                     Log.d("ERROR", "Login failed");
-                    Toast toast = Toast.makeText(getApplicationContext(), "Login failed! Please try again", Toast.LENGTH_LONG);
-                    toast.show();
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                    alertDialog.setMessage("Login failed! Please, try again.");
+                    alertDialog.setTitle(response.message());
+                    alertDialog.setCancelable(true);
+
+                    alertDialog.create().show();
                 }
             }
 

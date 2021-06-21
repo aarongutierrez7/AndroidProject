@@ -13,7 +13,7 @@ import retrofit2.Response;
 
 public class EditarActivity extends AppCompatActivity {
 
-    EditText username;
+    /*EditText username;
     EditText correo;
     EditText password;
 
@@ -65,6 +65,6 @@ public class EditarActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 }

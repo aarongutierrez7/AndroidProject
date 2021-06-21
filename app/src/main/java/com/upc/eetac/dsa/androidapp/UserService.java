@@ -30,13 +30,16 @@ public interface UserService {
     @GET ("user/listaUsuarios")
     Call<User> getUserList();
 
-    @DELETE("user/borrarUsuario")
-    Call<User> deleteUser(@Body String user);
+    @DELETE("user/borrarUsuario/{username}/{password}")
+    Call<User> deleteUser(@Path("username") String username, @Path("password") String password);
 
     @GET ("tienda/catalogo")
     Call<List<Object>> getObjetosTienda();
     @GET ("estadisticas/records")
     Call<List<RecordUsuario>> getRecordsTotales();
+
+    @GET ("estadisticas/partidasUsuario/{username}")
+    Call<List<RecordUsuario>> getRecordsIndividual(@Path("username") String username);
 
     @POST("tienda/comprarObjeto")
     Call<CredentialsCompra> addObjetoTienda(@Body CredentialsCompra credentials);

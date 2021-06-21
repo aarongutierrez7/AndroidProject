@@ -1,28 +1,26 @@
 package com.upc.eetac.dsa.androidapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import java.util.List;
 
 import models.RecordUsuario;
-import models.User;
-import models.Object;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecordsActivity extends AppCompatActivity {
+public class IndividualRecordsActivity extends AppCompatActivity {
 
-   UserService userAPI;
+    UserService userAPI;
+    SharedPreferences sharedPreferences;
     TextView usuario;
     TextView kills;
     TextView tiempo;
@@ -45,11 +43,10 @@ public class RecordsActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.RecyclerViewRanking);
         recyclerView.setHasFixedSize(false);
-        layoutManager = new LinearLayoutManager(RecordsActivity.this);
+        layoutManager = new LinearLayoutManager(IndividualRecordsActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         myAdapterRecords = new MyAdapterRecords(context);
         recyclerView.setAdapter(myAdapterRecords);
-
 
         usuario = findViewById(R.id.usuario);
         kills = findViewById(R.id.kills);
@@ -57,13 +54,16 @@ public class RecordsActivity extends AppCompatActivity {
         monedasTotales = findViewById(R.id.monedas);
         puntuacionFinal = findViewById(R.id.puntuacion);
 
-        getRecords();
+        sharedPreferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
+        String user = sharedPreferences.getString("user","No existe info");
+
+        getRecords(user);
 
     }
 
-    public void getRecords()
+    public void getRecords(String user)
         {
-            Call<List<RecordUsuario>> call = ClientAPI.getUserService().getRecordsTotales();
+            Call<List<RecordUsuario>> call = ClientAPI.getUserService().getRecordsIndividual(user);
             call.enqueue(new Callback<List<RecordUsuario>>() {
                 @Override
                 public void onResponse(Call<List<RecordUsuario>> call, Response<List<RecordUsuario>> response) {

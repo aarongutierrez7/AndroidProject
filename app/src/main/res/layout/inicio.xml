@@ -9,12 +9,14 @@
 
     <RelativeLayout
         android:id="@+id/idLayoutFondo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="451dp"
+        android:layout_height="800dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="-40dp"
         android:layout_marginTop="-70dp"
         android:layout_marginRight="-40dp"
-        android:background="@drawable/banner_redondo">
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/fondo_bosque2">
 
     </RelativeLayout>
 
@@ -35,6 +37,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="138dp"
         android:layout_marginEnd="0dp"
+        android:background="@color/colorNegro"
         android:layout_marginRight="0dp"
         android:text="The archer of the EETAC"
         android:textAlignment="center"

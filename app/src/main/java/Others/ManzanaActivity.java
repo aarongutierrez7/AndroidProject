@@ -1,8 +1,10 @@
-package com.upc.eetac.dsa.androidapp;
+package Others;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.upc.eetac.dsa.androidapp.R;
 
 public class ManzanaActivity extends AppCompatActivity {
 

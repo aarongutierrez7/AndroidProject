@@ -18,6 +18,14 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
+import Others.EscudoMaderaActivity;
+import Others.EscudoOroActivity;
+import Others.EscudoPlataActivity;
+import Others.FlechaOroActivity;
+import Others.FlechaPlataActivity;
+import Others.ManzanaActivity;
+import Others.PocimaAzulActivity;
+import Others.PocimaRojaActivity;
 import models.User;
 import models.Object;
 import retrofit2.Call;
@@ -169,32 +177,32 @@ public class TiendaActivity extends AppCompatActivity {
 
     public void escudoMadera(View view)
     {
-        Intent intent = new Intent(this,EscudoMaderaActivity.class);
+        Intent intent = new Intent(this, EscudoMaderaActivity.class);
         startActivity(intent);
     }
     public void escudoPlata(View view)
     {
-        Intent intent = new Intent(this,EscudoPlataActivity.class);
+        Intent intent = new Intent(this, EscudoPlataActivity.class);
         startActivity(intent);
     }
     public void escudoOro(View view)
     {
-        Intent intent = new Intent(this,EscudoOroActivity.class);
+        Intent intent = new Intent(this, EscudoOroActivity.class);
         startActivity(intent);
     }
     public void flechaPlata(View view)
     {
-        Intent intent = new Intent(this,FlechaPlataActivity.class);
+        Intent intent = new Intent(this, FlechaPlataActivity.class);
         startActivity(intent);
     }
     public void flechaOro(View view)
     {
-        Intent intent = new Intent(this,FlechaOroActivity.class);
+        Intent intent = new Intent(this, FlechaOroActivity.class);
         startActivity(intent);
     }
     public void manzana(View view)
     {
-        Intent intent = new Intent(this,ManzanaActivity.class);
+        Intent intent = new Intent(this, ManzanaActivity.class);
         startActivity(intent);
     }
     public void pocimaAzul(View view)
